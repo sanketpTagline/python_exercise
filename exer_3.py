@@ -9,11 +9,6 @@ wordCount = {}
 
 for words in name_split:
     for word in words:
-        
         wordCount[word] = wordCount.get(word,0)+1
         
 print("\nword count :",wordCount)
-
- 
-
- 
