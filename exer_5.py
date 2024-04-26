@@ -1,14 +1,12 @@
-Numbers = [9, 4, 8, 10, 2, 4, 8, 3, 14, 4, 8]
-n = int(input("Enter the Number: "))
-pair = []
+from itertools import combinations
+numbers = [9, 4, 8, 10, 2, 4, 8, 3, 14, 4, 8]
+sum = int(input("Enter the Number: "))
 
-for i in range(0, len(Numbers)):  
-    for j in range(0, len(Numbers)):  
-        if (Numbers[i]+ Numbers[j]) == n:
-           
-            if [Numbers[i],Numbers[j]]  not in pair and [Numbers[j],Numbers[i]]  not in pair:
-                    pair.append([Numbers[i],Numbers[j]])
-                  
-            
-print(pair)    
- 
+comb = [[a,b] for [a,b] in combinations(numbers,2) if a+b == sum]
+uniqueCombination = []
+for [a,b] in comb:
+    if [a,b] in uniqueCombination or [b,a] in uniqueCombination:
+        continue
+    else:
+        uniqueCombination.append([a,b])
+print(uniqueCombination)
