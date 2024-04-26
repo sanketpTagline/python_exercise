@@ -17,8 +17,6 @@ date_format = "%d/%m/%Y"
 staring_date=input("\nEnter Your Starting Date\n(Enter date as \"DD/MM/YYYY\")\n-> ")
 Ending_date=input("\nEnter Your Ending Date\n(Enter date as \"DD/MM/YYYY\")\n-> ")
 
-# today_date=datetime.today().strftime(date_format)
-# today_date = datetime.strptime(today_date, date_format)
 
 due_date = datetime.strptime(staring_date, date_format)
 Ending_date = datetime.strptime(Ending_date, date_format)
