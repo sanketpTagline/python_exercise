@@ -1,31 +1,36 @@
-# import datetime as dt 
+from datetime import datetime as dt 
+import portion as p 
+
+starting_time_string = input("Enter Start Date (YYYY-MM-DD HH:MM AM/PM) : ")
+ending_time_string = input("Enter Ending Date (YYYY-MM-DD HH:MM AM/PM) : ")
  
+start_time = dt.strptime(starting_time_string, '%Y-%m-%d %I:%M %p')
+ending_time = dt.strptime(ending_time_string, '%Y-%m-%d %I:%M %p')
 
-# Starting_date =  input(dt.datetime)
-# print(Starting_date)
+print("starting timr ",start_time)
+print("Ending time ",ending_time)
 
-# Ending_date =   input(dt.datetime)
-# print(Ending_date)
-
- 
-# 2024-04-26 11:41:56.977030
-from datetime import datetime
-date_format = "%d/%m/%Y"
-# s1 = now.strftime("%m/%d/%Y, %H:%M:%S") 
-
-
-staring_date=input("\nEnter Your Starting Date\n(Enter date as \"DD/MM/YYYY\")\n-> ")
-Ending_date=input("\nEnter Your Ending Date\n(Enter date as \"DD/MM/YYYY\")\n-> ")
-
-
-due_date = datetime.strptime(staring_date, date_format)
-Ending_date = datetime.strptime(Ending_date, date_format)
-
-
-x = abs(Ending_date-due_date)
-if due_date<Ending_date:
-    print(f"{x.days} Days Overdue")
-elif due_date>Ending_date:
-    print(f"{x.days} Days: Remaining")
-else:
-    print("Today is the last date")
+def calculateDiff(startDate, endDate):
+    night_time  = p.closed(0,6)
+    
+    day_time = p.closed(startDate.replace(hour = night_time.upper,minute = 0),endDate.replace(hour = night_time.lower,minute = 0)) 
+    print("day interval",day_time)
+    night_time = p.closed(startDate.replace(hour = night_time.lower,minute = 0),endDate.replace(hour = night_time.upper,minute = 0))
+    print("night interval",night_time)
+        
+    time_differnce = (ending_time -start_time).total_seconds()/3600
+    
+    if (startDate.hour >= 0 and startDate.hour <= 6):
+        time_differnce += (6 - startDate.hour)
+         
+    if (endDate.hour >= 0 and endDate.hour <= 6):
+        time_differnce += (endDate.hour)
+      
+    if day_time.overlaps(night_time):
+        intersection_time = day_time & night_time
+        overlaphour = (intersection_time.upper - intersection_time.lower).total_seconds()/3600
+        time_differnce -= overlaphour 
+    return time_differnce 
+  
+result= calculateDiff(start_time,ending_time)
+print(result) 
