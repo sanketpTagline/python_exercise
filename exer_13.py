@@ -39,7 +39,3 @@ if __name__ == "__main__":
     print("Compounded value:", n1.compound_the_numbers(reduce_func=lambda_func3))
 
     print("Sorted list:", n1.sort())
- 
- 
-  
- 
